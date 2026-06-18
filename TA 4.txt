@@ -1,0 +1,22 @@
+﻿#include <LedControl.h>
+LedControl lc(11,13,10,2);
+byte smile[8]={
+B00111100,B01000010,B10100101,B10000001,
+B10100101,B10011001,B01000010,B00111100};
+byte sad[8]={
+B00111100,B01000010,B10100101,B10000001,
+B10011001,B10100101,B01000010,B00111100};
+void draw(int d,byte p[]){
+  for(int r=0;r<8;r++)
+    for(int c=0;c<8;c++)
+      lc.setLed(d,r,c,bitRead(p[r],7-c));
+}
+void setup(){
+  for(int i=0;i<2;i++){
+    lc.shutdown(i,false);
+    lc.setIntensity(i,8);
+  }
+  draw(0,smile);
+  draw(1,sad);
+}
+void loop(){}
