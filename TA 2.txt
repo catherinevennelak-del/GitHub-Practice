@@ -1,0 +1,20 @@
+﻿#include <LedControl.h>
+LedControl lc(11,13,10,1);
+byte A[8]={
+B00111100,
+B01000010,
+B10000001,
+B10000001,
+B11111111,
+B10000001,
+B10000001,
+B10000001};
+void setup(){
+  lc.shutdown(0,false);
+  lc.setIntensity(0,8);
+  lc.clearDisplay(0);
+  for(int r=0;r<8;r++)
+    for(int c=0;c<8;c++)
+      lc.setLed(0,r,c,bitRead(A[r],7-c));
+}
+void loop(){}
